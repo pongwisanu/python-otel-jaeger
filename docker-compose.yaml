@@ -1,0 +1,23 @@
+---
+services:
+  jaeger:
+    container_name: jaeger
+    image: jaegertracing/all-in-one:1.60
+    ports:
+      - 4317:4317
+      - 4318:4318
+      - 14250:14250
+      - 14268:14268
+      - 16686:16686
+    environment:
+      - COLLECTOR_OTLP_ENABLED=true
+  grpc:
+    container_name: grpc
+    build: ./grpc
+    ports:
+      - 8001:8000
+  http:
+    container_name: http
+    build: ./http
+    ports:
+      - 8002:8000
